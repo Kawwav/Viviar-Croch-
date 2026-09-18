@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../componentes/header.jsx'
 import { produtos } from './produtos.js'
+import { asset } from '../utils/asset.js'
 import './bolsas.css'
 
 const LABEL_DISPONIBILIDADE = {
@@ -76,7 +77,7 @@ function Bolsas() {
 
       <section className="bolsas-hero">
         <div className="bolsas-hero-imagem">
-          <img src="/bolsas/1.jpg" alt="Coleção de bolsas" />
+          <img src={asset('bolsas/1.jpg')} alt="Coleção de bolsas" />
         </div>
         <div className="bolsas-hero-escurecido" />
         <div className="bolsas-hero-conteudo">

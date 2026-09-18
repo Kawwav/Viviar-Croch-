@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTransicao } from './TransicaoCortina.jsx'
+import { asset } from '../utils/asset.js'
 import './header.css'
 
 const MODEL_VIEWER_SRC =
@@ -95,7 +96,7 @@ export default function Header({ visivel = false, corFundo, onBuscar }) {
                   </Link>
                 ) : (
                   <a
-                    href={`/#${link.scrollId}`}
+                    href={`${import.meta.env.BASE_URL}#${link.scrollId}`}
                     onClick={irParaSecao(link.scrollId)}
                   >
                     {link.label}
@@ -106,9 +107,9 @@ export default function Header({ visivel = false, corFundo, onBuscar }) {
           </ul>
         </nav>
 
-        <a className="site-header__logo" href="/" aria-label="Página inicial">
-          <img src="/logopreta.png" alt="Logo" />
-        </a>
+        <Link className="site-header__logo" to="/" aria-label="Página inicial">
+          <img src={asset('logopreta.png')} alt="Logo" />
+        </Link>
 
         <div className="site-header__spacer">
           <div className="site-header__acoes">
@@ -155,7 +156,7 @@ export default function Header({ visivel = false, corFundo, onBuscar }) {
             <div className="site-header__model" aria-hidden="true">
               <model-viewer
                 className="site-header__model-viewer"
-                src="/logo.glb"
+                src={asset('logo.glb')}
                 alt="Logo 3D Viviart Crochê"
                 auto-rotate
                 rotation-per-second="24deg"
@@ -225,7 +226,7 @@ export default function Header({ visivel = false, corFundo, onBuscar }) {
                 </Link>
               ) : (
                 <a
-                  href={`/#${link.scrollId}`}
+                  href={`${import.meta.env.BASE_URL}#${link.scrollId}`}
                   onClick={(evento) => {
                     irParaSecao(link.scrollId)(evento)
                     closeMenu()

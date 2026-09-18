@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ContatoVideo from '../paginas/videoc'
+import { asset } from '../utils/asset.js'
 import './footer.css'
 
 function Footer() {
@@ -36,8 +37,8 @@ function Footer() {
         <div className="footer-container">
           <div className="footer-esquerda">
             <div className="footer-logos">
-              <img src="/viviart.png" alt="Vivi Art" className="footer-logo" />
-              <img src="/croche.png" alt="Crochê" className="footer-logo" />
+              <img src={asset('viviart.png')} alt="Vivi Art" className="footer-logo" />
+              <img src={asset('croche.png')} alt="Crochê" className="footer-logo" />
             </div>
 
             <div className="footer-colunas">

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { asset } from '../utils/asset.js'
 import './sobre.css'
 
 const blocos = [
@@ -90,7 +91,7 @@ function Sobre() {
         </div>
 
         <div className="sobre-imagem">
-          <img src="croche.webp" alt="Bolsa em destaque" />
+          <img src={asset('croche.webp')} alt="Bolsa em destaque" />
         </div>
       </section>
     </div>

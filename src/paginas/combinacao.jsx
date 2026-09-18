@@ -1,23 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
+import { asset } from '../utils/asset.js'
 import './combinacao.css'
 
 const DURACAO_TRANSICAO = 1000 // cobre os 0.9s de animação + 0.08s de atraso na entrada
 
 const looks = [
   {
-    imagem: 'combinacao/combinacao1.webp',
+    imagem: asset('combinacao/combinacao1.webp'),
     produto: {
       nome: 'Bolsa Girassol Marfim',
       preco: 'R$ 180,00',
-      imagem: '/bolsas/bolsa1.webp',
+      imagem: asset('bolsas/bolsa1.webp'),
     },
   },
   {
-    imagem: 'combinacao/combinacao2.webp',
+    imagem: asset('combinacao/combinacao2.webp'),
     produto: {
       nome: 'Bolsa Tiracolo Petróleo',
       preco: 'R$ 210,00',
-      imagem: '/bolsas/bolsa2.webp',
+      imagem: asset('bolsas/bolsa2.webp'),
     },
   },
 ]

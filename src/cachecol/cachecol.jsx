@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../componentes/header.jsx'
 import { produtos } from './produtos.js'
+import { asset } from '../utils/asset.js'
 import './cachecol.css'
 
 const LABEL_DISPONIBILIDADE = {
@@ -75,7 +76,7 @@ function Cachecol() {
 
       <section className="cachecol-hero">
         <div className="cachecol-hero-imagem">
-          <img src="/cachecol/hero-cachecol.webp" alt="Coleção de cachecóis" />
+          <img src={asset('cachecol/hero-cachecol.webp')} alt="Coleção de cachecóis" />
         </div>
         <div className="cachecol-hero-escurecido" />
         <div className="cachecol-hero-conteudo">
