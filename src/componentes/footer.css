@@ -1,0 +1,273 @@
+.site-footer {
+  position: relative;
+  z-index: 1;
+  background: #fdfbf7;
+  padding: 5rem 2rem 4.5rem;
+}
+
+.footer-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4rem;
+}
+
+.footer-logos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  margin-left: -1.25rem;
+}
+
+.footer-logo {
+  width: 20rem;
+  height: auto;
+}
+
+.footer-logo + .footer-logo {
+  margin-top: -6.1rem;
+}
+
+.footer-colunas {
+  display: flex;
+  gap: 3.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.footer-coluna__titulo {
+  margin: 0 0 1rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #221b16;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer-links a {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #4f483d;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #221b16;
+}
+
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 50%;
+  background: transparent;
+  color: #857c6e;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.footer-social a:hover {
+  background: #efe8da;
+  color: #221b16;
+}
+
+.footer-social svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: currentColor;
+  display: block;
+}
+
+.footer-copy {
+  margin: 2.5rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e6dfd2;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #857c6e;
+}
+
+.contato-container {
+  width: 100%;
+}
+
+.contato-frase {
+  margin: 0 0 0.85rem;
+  font-family: var(--sans);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.7;
+  color: #221b16;
+}
+
+.contato-frase--espacada {
+  margin-top: 0.75rem;
+}
+
+.contato-campo {
+  font-family: var(--sans);
+  font-size: inherit;
+  font-style: italic;
+  color: #221b16;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #d8cebb;
+  outline: none;
+  padding: 0 0.1em;
+  transition: border-color 0.2s ease;
+}
+
+.contato-campo::placeholder {
+  font-style: italic;
+  color: #b7ac9c;
+}
+
+.contato-campo:focus {
+  border-bottom-color: #a89877;
+}
+
+.contato-mensagem {
+  display: block;
+  width: 100%;
+  margin-top: 0.2rem;
+  resize: none;
+  overflow: hidden;
+  font-family: var(--sans);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  line-height: 1.6;
+  color: #221b16;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.contato-mensagem::placeholder {
+  font-style: italic;
+  color: #b7ac9c;
+}
+
+.contato-divisor {
+  border: none;
+  border-top: 1px solid #e6dfd2;
+  margin: 2rem 0 1.75rem;
+}
+
+.contato-rodape {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+}
+
+.contato-termos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contato-termos p {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #857c6e;
+}
+
+.contato-termos a {
+  color: #857c6e;
+  text-decoration: underline;
+}
+
+.contato-botao {
+  align-self: flex-start;
+  padding: 0.9rem 2.5rem;
+  border: none;
+  background: #3a2f27;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+  border-radius: 0.85rem;
+}
+
+.contato-botao:hover {
+  opacity: 0.85;
+}
+
+.contato-info {
+  display: flex;
+  gap: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: #f1e7d8;
+  border-radius: 0.85rem;
+}
+
+.contato-info__label {
+  margin: 0 0 0.3rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #221b16;
+}
+
+.contato-info__valor {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: #4f483d;
+}
+
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .footer-colunas {
+    flex-wrap: wrap;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding: 4rem 1.25rem 3.5rem;
+  }
+
+  .contato-rodape {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contato-info {
+    gap: 1.5rem;
+    padding: 1rem 1.25rem;
+    flex-wrap: wrap;
+  }
+}

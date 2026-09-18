@@ -1,0 +1,191 @@
+.contato-video {
+  position: relative;
+  background: #fdfbf7;
+  display: flex;
+  justify-content: center;
+  padding: 3.5rem 2rem 0;
+}
+
+.contato-video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1540px;
+  height: clamp(380px, 34vw, 540px);
+  border-radius: 1rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.contato-video-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.contato-video-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.32) 100%);
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.contato-video-container--tocando::after {
+  opacity: 0.6;
+}
+
+.contato-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.contato-video-container--tocando .contato-video-overlay {
+  opacity: 0;
+}
+
+.contato-video-legenda {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.contato-video-titulo {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4.6vw, 3.2rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+.contato-video-play {
+  pointer-events: auto;
+  margin-top: 0.5rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  color: #221b16;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.contato-video-play svg {
+  transform: translateX(1px);
+}
+
+.contato-video-play:hover {
+  transform: scale(1.06);
+  background: #fff;
+}
+
+
+.contato-video-player {
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(34, 27, 22, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.contato-video-container--tocando.contato-video-container--controles .contato-video-player {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.contato-video-player__botao {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.contato-video-player__botao:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.contato-video-player__barra {
+  position: relative;
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+}
+
+.contato-video-player__progresso {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  border-radius: 999px;
+  background: #fff;
+}
+
+@media (max-width: 700px) {
+  .contato-video {
+    padding: 2.5rem 1.25rem 0;
+  }
+
+  .contato-video-container {
+    height: clamp(240px, 60vw, 340px);
+    border-radius: 0.75rem;
+  }
+
+  .contato-video-play {
+    width: 46px;
+    height: 46px;
+  }
+
+  .contato-video-player {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.45rem 0.7rem;
+  }
+}

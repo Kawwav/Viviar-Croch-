@@ -1,0 +1,593 @@
+.colecao {
+  padding: 5rem 2rem 6rem;
+  background: #efeff8;
+  text-align: center;
+}
+
+.colecao-etiqueta {
+  margin: 0 0 0.75rem;
+  color: #000000;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.colecao-personalizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1300px;
+  margin: 5rem auto 0;
+  text-align: left;
+}
+
+.colecao-personalizar-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 32%;
+}
+
+.personalizar-titulo {
+  margin: 0;
+  color: #08060d;
+  font-family: var(--sans);
+  font-size: 2.1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.personalizar-subtitulo {
+  margin: 0.6rem 0 0;
+  color: #6b6375;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.personalizar-cores {
+  display: flex;
+  flex-direction: row;
+  gap: 1.1rem;
+  margin-top: 2rem;
+}
+
+.personalizar-cor-nome {
+  margin: 0.9rem 0 0;
+  color: #6b6375;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  will-change: transform, opacity;
+}
+
+.personalizar-cor {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.personalizar-cor:hover {
+  transform: scale(1.08);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.personalizar-cor.ativa {
+  border-color: #08060d;
+}
+
+.personalizar-carrossel {
+  position: relative;
+  flex: 1 1 65%;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.personalizar-modelo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  cursor: grab;
+  overscroll-behavior: contain;
+  overflow: hidden;
+}
+
+.personalizar-modelo-wrapper:active {
+  cursor: grabbing;
+}
+
+.personalizar-seta {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #08060d;
+  border-radius: 50%;
+  background: #efeff8;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background 0.25s ease;
+}
+
+.personalizar-seta:hover {
+  background: #e5e4ee;
+}
+
+.personalizar-seta:active {
+  background: #dcdaea;
+}
+
+.personalizar-seta svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.personalizar-seta-esquerda {
+  left: -1.375rem;
+}
+
+.personalizar-seta-direita {
+  right: -1.375rem;
+}
+
+.personalizar-peca-nome {
+  margin: 1rem 0 0;
+  color: #6b6375;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.personalizar-modelo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(0% 0% 0% 0%);
+  background-color: transparent;
+}
+
+.personalizar-modelo canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+@media (max-width: 860px) {
+  .colecao-personalizar {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.75rem;
+  }
+
+  .colecao-personalizar-texto {
+    align-items: center;
+    order: 1;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .personalizar-carrossel {
+    order: 2;
+    flex: 0 0 auto;
+    max-width: 560px;
+  }
+
+  .personalizar-modelo-wrapper {
+    height: 560px;
+  }
+
+  .personalizar-seta-esquerda {
+    left: 0.5rem;
+  }
+
+  .personalizar-seta-direita {
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .personalizar-titulo {
+    font-size: 1.6rem;
+  }
+
+  .personalizar-carrossel {
+    max-width: 460px;
+  }
+
+  .personalizar-modelo-wrapper {
+    height: 460px;
+  }
+}
+
+.colecao-abas {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.colecao-aba {
+  padding: 0 0 0.4rem;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: #6b6375;
+  font-family: var(--sans);
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.colecao-aba:hover {
+  color: #08060d;
+}
+
+.colecao-aba.ativa {
+  color: #08060d;
+}
+
+.colecao-aba-indicador {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  background: #000000;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1),
+    width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform, width;
+}
+
+.colecao-grade {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.colecao-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colecao-tag {
+  display: block;
+  margin-bottom: 1rem;
+  color: #6b6375;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  will-change: transform, opacity, filter;
+}
+
+.colecao-imagem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 280px;
+  margin-bottom: 1.5rem;
+  will-change: clip-path;
+}
+
+.colecao-imagem img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.45s ease;
+}
+
+.colecao-imagem-lado {
+  opacity: 0;
+}
+
+.colecao-item:hover .colecao-imagem-principal {
+  opacity: 0;
+}
+
+.colecao-item:hover .colecao-imagem-lado {
+  opacity: 1;
+}
+
+.colecao-nome {
+  margin: 0 0 0.4rem;
+  color: #08060d;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  will-change: transform, opacity, filter;
+}
+
+.colecao-preco {
+  margin: 0;
+  color: #6b6375;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  will-change: transform, opacity, filter;
+}
+
+.colecao-botao {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  display: inline-block;
+  margin-top: 3.5rem;
+  padding: 1rem 2.5rem;
+  background: #08060d;
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+.colecao-botao::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #fff;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.colecao-botao:hover {
+  color: #08060d;
+}
+
+.colecao-botao:hover::before {
+  transform: translateX(0);
+}
+
+.colecao-faixa {
+  margin-top: 5rem;
+  border-top: 1px solid #e5e4e7;
+}
+
+.faixa-linha {
+  overflow: hidden;
+  border-bottom: 1px solid #e5e4e7;
+  padding: 1.75rem 0;
+}
+
+.faixa-trilha {
+  display: flex;
+  width: max-content;
+  animation: faixa-esquerda 90s linear infinite;
+}
+
+.faixa-direita .faixa-trilha {
+  animation-name: faixa-direita;
+}
+
+@keyframes faixa-esquerda {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes faixa-direita {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.faixa-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.faixa-texto {
+  color: #6b6375;
+  font-family: var(--sans);
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.faixa-imagem {
+  height: 3.25rem;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .colecao-grade {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 3.5rem;
+  }
+}
+
+.colecao-grade-wrapper {
+  position: relative;
+}
+
+/* ===== cortina de transição ao ir pra bolsas e cachecol ===== */
+.colecao-cortina {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.colecao-cortina-retangulo {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #08060d;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.colecao-cortina-texto {
+  display: inline-block;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: clamp(2.2rem, 7vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.colecao-setas {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .colecao {
+    padding: 3.5rem 1.25rem 4rem;
+  }
+
+  .colecao-grade {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+    padding: 0 1.25rem 0.5rem;
+    margin: 0 -1.25rem;
+  }
+
+  .colecao-grade::-webkit-scrollbar {
+    display: none;
+  }
+
+  .colecao-grade.arrastando,
+  .colecao-grade.animando {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  .colecao-item {
+    flex: 0 0 auto;
+    width: 62%;
+    scroll-snap-align: start;
+    user-select: none;
+  }
+
+  .colecao-imagem img {
+    pointer-events: none;
+  }
+
+  .colecao-setas {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .colecao-arraste {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #08060d;
+    border-radius: 50%;
+    background: #efeff8;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+
+  .colecao-arraste:hover {
+    background: #e5e4ee;
+  }
+
+  .colecao-arraste:active {
+    background: #dcdaea;
+  }
+
+  .colecao-arraste.apagado {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .colecao-arraste.apagado:hover {
+    background: #efeff8;
+  }
+
+  .colecao-arraste svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .colecao-abas {
+    gap: 1.5rem;
+  }
+
+  .colecao-aba {
+    font-size: 1.3rem;
+  }
+
+  .colecao-faixa {
+    margin-top: 3.5rem;
+  }
+
+  .faixa-linha {
+    padding: 1.25rem 0;
+  }
+
+  .faixa-texto {
+    font-size: 1.1rem;
+  }
+
+  .faixa-imagem {
+    height: 2rem;
+  }
+
+  .faixa-item {
+    gap: 1.25rem;
+    padding: 0 1.25rem;
+  }
+}

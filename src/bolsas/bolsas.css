@@ -1,0 +1,417 @@
+.bolsas-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
+  min-height: 420px;
+  overflow: hidden;
+  background: #08060d;
+}
+
+.bolsas-hero-imagem {
+  position: absolute;
+  inset: 0;
+}
+
+.bolsas-hero-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.bolsas-hero-escurecido {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 6, 13, 0.75);
+}
+
+.bolsas-hero-conteudo {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: 0 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.bolsas-hero-titulo {
+  margin: 0 0 1.25rem;
+  font-family: var(--sans);
+  font-size: 3rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bolsas-hero-descricao {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: #f2f1f6;
+}
+
+@media (max-width: 560px) {
+  .bolsas-hero {
+    height: 50vh;
+    min-height: 320px;
+  }
+
+  .bolsas-hero-titulo {
+    font-size: 2.1rem;
+  }
+
+  .bolsas-hero-descricao {
+    font-size: 0.85rem;
+  }
+}
+
+.bolsas-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem 2.5rem;
+  border-top: 1px solid #e5e4e7;
+  border-bottom: 1px solid #e5e4e7;
+  flex-wrap: wrap;
+}
+
+.bolsas-barra-visualizacao {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bolsas-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #c9c7d1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.bolsas-icone svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.bolsas-icone:hover {
+  color: #6b6375;
+}
+
+.bolsas-icone.ativo {
+  color: #08060d;
+}
+
+.bolsas-contagem {
+  margin: 0;
+  color: #6b6375;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bolsas-barra-direita {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.bolsas-filtro-rapido {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bolsas-filtro-rapido-botao {
+  padding: 0.4rem 0.85rem;
+  border: 1px solid #dedce4;
+  border-radius: 999px;
+  background: none;
+  color: #6b6375;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.bolsas-filtro-rapido-botao:hover {
+  border-color: #08060d;
+  color: #08060d;
+}
+
+.bolsas-filtro-rapido-botao.ativo {
+  background: #08060d;
+  border-color: #08060d;
+  color: #fff;
+}
+
+.bolsas-barra-botao {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #6b6375;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.bolsas-barra-botao svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.bolsas-barra-botao:hover,
+.bolsas-barra-botao.ativo {
+  color: #08060d;
+}
+
+
+.bolsas-ordenar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bolsas-ordenar-seta {
+  transition: transform 0.2s ease;
+}
+
+.bolsas-ordenar-seta.aberta {
+  transform: rotate(180deg);
+}
+
+.bolsas-ordenar-menu {
+  position: absolute;
+  top: calc(100% + 0.85rem);
+  right: 0;
+  z-index: 10;
+  min-width: 220px;
+  margin: 0;
+  padding: 0.4rem;
+  list-style: none;
+  background: #fff;
+  border-radius: 0.6rem;
+  box-shadow: 0 12px 30px rgba(8, 6, 13, 0.14);
+}
+
+.bolsas-ordenar-opcao {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: none;
+  border-radius: 0.4rem;
+  background: none;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.bolsas-ordenar-opcao:hover {
+  background: #f2f1f7;
+}
+
+.bolsas-ordenar-opcao.ativa {
+  font-weight: 600;
+}
+
+/* grade de produtos */
+
+.bolsas-lista {
+  background: #fdfdfd;
+}
+
+.bolsas-vazio {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+  color: #6b6375;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.bolsas-grade {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 5rem;
+}
+
+.bolsas-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bolsas-tag {
+  position: absolute;
+  z-index: 1;
+  top: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bolsas-tag-promocao {
+  left: 0.75rem;
+  background: #b3413c;
+  color: #fff;
+}
+
+.bolsas-tag-disponibilidade {
+  right: 0.75rem;
+}
+
+.bolsas-tag-disponibilidade--estoque {
+  background: #e6f2ea;
+  color: #2f6b45;
+}
+
+.bolsas-tag-disponibilidade--encomenda {
+  background: #f4f3f7;
+  color: #6b6375;
+}
+
+.bolsas-imagem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+  margin-bottom: 1.25rem;
+  background: #f4f3f7;
+  overflow: hidden;
+}
+
+.bolsas-imagem img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 78%;
+  max-height: 78%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.45s ease;
+}
+
+.bolsas-imagem-lado {
+  opacity: 0;
+}
+
+.bolsas-item:hover .bolsas-imagem-principal {
+  opacity: 0;
+}
+
+.bolsas-item:hover .bolsas-imagem-lado {
+  opacity: 1;
+}
+
+.bolsas-nome {
+  margin: 0 0 0.4rem;
+  color: #08060d;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bolsas-preco {
+  margin: 0;
+  color: #6b6375;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.bolsas-preco-antigo {
+  margin-right: 0.5rem;
+  color: #b3413c;
+  text-decoration: line-through;
+}
+
+@media (max-width: 1024px) {
+  .bolsas-grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .bolsas-filtro-rapido {
+    order: 1;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .bolsas-barra-direita {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .bolsas-barra {
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .bolsas-barra-direita {
+    gap: 1rem;
+  }
+
+  .bolsas-contagem {
+    display: none;
+  }
+
+  .bolsas-ordenar-menu {
+    right: -1rem;
+    min-width: 200px;
+  }
+
+  .bolsas-grade {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .bolsas-imagem {
+    height: 220px;
+  }
+
+  .bolsas-tag {
+    font-size: 0.58rem;
+    padding: 0.25rem 0.55rem;
+  }
+}
