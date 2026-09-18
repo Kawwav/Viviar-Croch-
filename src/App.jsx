@@ -120,7 +120,7 @@ function Home() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Viviar-Croch-">
       <ScrollToTop />
       <TransicaoProvider>
         <Routes>
