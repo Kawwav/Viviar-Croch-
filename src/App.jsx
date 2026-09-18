@@ -15,8 +15,12 @@ import ProdutoBolsa from './bolsas/produto.jsx'
 import Cachecol from './cachecol/cachecol.jsx'
 import ScrollToTop from './componentes/ScrollToTop.jsx'
 import Footer from './componentes/footer.jsx'
-
 gsap.registerPlugin(ScrollTrigger)
+
+// git add . 
+//git commit -m ""  
+//git branch -M main
+
 
 function Home() {
   const [headerVisivel, setHeaderVisivel] = useState(false)
