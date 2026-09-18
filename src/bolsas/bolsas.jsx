@@ -2,8 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../componentes/header.jsx'
 import { produtos } from './produtos.js'
-import { asset } from '../utils/asset.js'
 import './bolsas.css'
+
+const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
 
 const LABEL_DISPONIBILIDADE = {
   estoque: 'em estoque',
@@ -77,7 +78,7 @@ function Bolsas() {
 
       <section className="bolsas-hero">
         <div className="bolsas-hero-imagem">
-          <img src={asset('bolsas/1.jpg')} alt="Coleção de bolsas" />
+          <img src={ativo('/bolsas/1.jpg')} alt="Coleção de bolsas" />
         </div>
         <div className="bolsas-hero-escurecido" />
         <div className="bolsas-hero-conteudo">

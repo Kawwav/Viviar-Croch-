@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { useTransicao } from '../componentes/TransicaoCortina.jsx'
-import { asset } from '../utils/asset.js'
 import './comeco.css'
 
-const imagens = [asset('fundo1.webp'), asset('fundo2.webp')]
+const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
+
+const imagens = [ativo('/fundo1.webp'), ativo('/fundo2.webp')]
 
 function Comeco({ onExpansaoCompleta }) {
   const [atual, setAtual] = useState(0)

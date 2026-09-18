@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { asset } from '../utils/asset.js'
 import './videoc.css'
 
 function ContatoVideo() {
@@ -78,7 +77,7 @@ function ContatoVideo() {
         <video
           ref={videoRef}
           className="contato-video-media"
-          src={asset('horizontal.mp4')}
+          src="horizontal.mp4"
           loop
           muted={mudo}
           playsInline

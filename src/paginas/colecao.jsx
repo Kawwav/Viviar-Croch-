@@ -17,49 +17,51 @@ import './colecao.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
+
 const produtos = {
   bolsas: [
     {
       nome: 'Bolsa Girassol Marfim',
       preco: 'R$ 180,00',
-      imagem: '/bolsas/bolsa1.webp',
+      imagem: ativo('/bolsas/bolsa1.webp'),
     },
     {
       nome: 'Bolsa Tiracolo Petróleo',
       preco: 'R$ 210,00',
-      imagem: '/bolsas/bolsa2.webp',
+      imagem: ativo('/bolsas/bolsa2.webp'),
     },
     {
       nome: 'Bolsa Estruturada Café',
       preco: 'R$ 195,00',
-      imagem: '/bolsas/bolsa3.webp',
+      imagem: ativo('/bolsas/bolsa3.webp'),
     },
     {
       nome: 'Bolsa Transversal Marfim',
       preco: 'R$ 165,00',
-      imagem: '/bolsas/bolsa4.webp',
+      imagem: ativo('/bolsas/bolsa4.webp'),
     },
   ],
   acessorios: [
     {
       nome: 'Cachecol Girassol Marfim',
       preco: 'R$ 90,00',
-      imagem: '/cachecol/cachecol1.webp',
+      imagem: ativo('/cachecol/cachecol1.webp'),
     },
     {
       nome: 'Cachecol Xadrez Petróleo',
       preco: 'R$ 95,00',
-      imagem: '/cachecol/cachecol2.webp',
+      imagem: ativo('/cachecol/cachecol2.webp'),
     },
     {
       nome: 'Cachecol Trançado Café',
       preco: 'R$ 85,00',
-      imagem: '/cachecol/cachecol3.webp',
+      imagem: ativo('/cachecol/cachecol3.webp'),
     },
     {
       nome: 'Cachecol Listrado Trigo',
       preco: 'R$ 80,00',
-      imagem: '/cachecol/cachecol4.webp',
+      imagem: ativo('/cachecol/cachecol4.webp'),
     },
   ],
 }
@@ -71,28 +73,28 @@ const modelosPersonalizar = [
       {
         id: 'classica-azul',
         nome: 'azul',
-        modelo: '/bolsas/bolsaazul.glb',
+        modelo: ativo('/bolsas/bolsaazul.glb'),
         corClara: '#5bb8d9',
         corEscura: '#161a4a',
       },
       {
         id: 'classica-rosa',
         nome: 'rosa',
-        modelo: '/bolsas/bolsarosa.glb',
+        modelo: ativo('/bolsas/bolsarosa.glb'),
         corClara: '#f472b6',
         corEscura: '#8a0e4a',
       },
       {
         id: 'classica-amarelo',
         nome: 'amarelo',
-        modelo: '/bolsas/bolsaamarela.glb',
+        modelo: ativo('/bolsas/bolsaamarela.glb'),
         corClara: '#e6d35c',
         corEscura: '#5c4e12',
       },
       {
         id: 'classica-vermelho',
         nome: 'vermelho',
-        modelo: '/bolsas/bolsavermelha.glb',
+        modelo: ativo('/bolsas/bolsavermelha.glb'),
         corClara: '#e2665f',
         corEscura: '#6b1420',
       },
@@ -104,28 +106,28 @@ const modelosPersonalizar = [
       {
         id: 'trancada-azul',
         nome: 'azul',
-        modelo: '/bolsas/bolsa1azul.glb',
+        modelo: ativo('/bolsas/bolsa1azul.glb'),
         corClara: '#5bb8d9',
         corEscura: '#161a4a',
       },
       {
         id: 'trancada-verde-terracota',
         nome: 'verde terracota',
-        modelo: '/bolsas/bolsa2verdeterracota.glb',
+        modelo: ativo('/bolsas/bolsa2verdeterracota.glb'),
         corClara: '#9caf6b',
         corEscura: '#7a3e26',
       },
       {
         id: 'trancada-rosa-vinho',
         nome: 'rosa vinho',
-        modelo: '/bolsas/bolsa3rosavinho.glb',
+        modelo: ativo('/bolsas/bolsa3rosavinho.glb'),
         corClara: '#c96b86',
         corEscura: '#5c1230',
       },
       {
         id: 'trancada-rosa-pink',
         nome: 'rosa pink',
-        modelo: '/bolsas/bolsa4rosapink.glb',
+        modelo: ativo('/bolsas/bolsa4rosapink.glb'),
         corClara: '#f24fa0',
         corEscura: '#8a0e57',
       },
@@ -853,13 +855,13 @@ function Colecao() {
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`esq-a-${indice}`}>
                 <span className="faixa-texto">{fraseEsquerda}</span>
-                <img src="/bolsas/bolsa1.webp" alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa1.webp')} alt="" className="faixa-imagem" />
               </span>
             ))}
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`esq-b-${indice}`} aria-hidden="true">
                 <span className="faixa-texto">{fraseEsquerda}</span>
-                <img src="/bolsas/bolsa2.webp" alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" />
               </span>
             ))}
           </div>
@@ -870,13 +872,13 @@ function Colecao() {
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`dir-a-${indice}`}>
                 <span className="faixa-texto">{fraseDireita}</span>
-                <img src="/bolsas/bolsa2.webp" alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" />
               </span>
             ))}
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`dir-b-${indice}`} aria-hidden="true">
                 <span className="faixa-texto">{fraseDireita}</span>
-                <img src="/bolsas/bolsa2.webp" alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" />
               </span>
             ))}
           </div>

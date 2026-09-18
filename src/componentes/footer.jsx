@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ContatoVideo from '../paginas/videoc'
-import { asset } from '../utils/asset.js'
 import './footer.css'
+
+const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
 
 function Footer() {
   const [nome, setNome] = useState('')
@@ -37,8 +38,8 @@ function Footer() {
         <div className="footer-container">
           <div className="footer-esquerda">
             <div className="footer-logos">
-              <img src={asset('viviart.png')} alt="Vivi Art" className="footer-logo" />
-              <img src={asset('croche.png')} alt="Crochê" className="footer-logo" />
+              <img src={ativo('/viviart.png')} alt="Vivi Art" className="footer-logo" />
+              <img src={ativo('/croche.png')} alt="Crochê" className="footer-logo" />
             </div>
 
             <div className="footer-colunas">

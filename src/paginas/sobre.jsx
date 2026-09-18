@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { asset } from '../utils/asset.js'
 import './sobre.css'
+
+const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
 
 const blocos = [
   {
@@ -91,7 +92,7 @@ function Sobre() {
         </div>
 
         <div className="sobre-imagem">
-          <img src={asset('croche.webp')} alt="Bolsa em destaque" />
+          <img src={ativo('/croche.webp')} alt="Bolsa em destaque" />
         </div>
       </section>
     </div>

@@ -1,4 +1,4 @@
-import { asset } from '../utils/asset.js'
+const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
 
 export const produtos = [
   {
@@ -6,7 +6,7 @@ export const produtos = [
     nome: 'Bolsa Girassol Marfim',
     preco: 'R$ 180,00',
     disponibilidade: 'estoque',
-    imagens: [asset('bolsas/bolsa1.webp'), asset('bolsas/lado1.webp')],
+    imagens: [ativo('/bolsas/bolsa1.webp'), ativo('/bolsas/lado1.webp')],
     descricao:
       'Bolsa de crochê feita à mão em tom marfim, com detalhe floral e alça em couro sintético. Leve, resistente e perfeita para o dia a dia.',
     caracteristicas: [
@@ -26,7 +26,7 @@ export const produtos = [
     preco: 'R$ 210,00',
     precoAntigo: 'R$ 260,00',
     disponibilidade: 'encomenda',
-    imagens: [asset('bolsas/bolsa2.webp'), asset('bolsas/lado2.webp')],
+    imagens: [ativo('/bolsas/bolsa2.webp'), ativo('/bolsas/lado2.webp')],
     descricao:
       'Bolsa tiracolo em crochê na cor petróleo, com alça regulável em dois tamanhos — pode ser usada cruzada ou solta no ombro.',
     caracteristicas: [
@@ -45,7 +45,7 @@ export const produtos = [
     nome: 'Bolsa Estruturada Café',
     preco: 'R$ 195,00',
     disponibilidade: 'encomenda',
-    imagens: [asset('bolsas/bolsa3.webp'), asset('bolsas/lado3.webp')],
+    imagens: [ativo('/bolsas/bolsa3.webp'), ativo('/bolsas/lado3.webp')],
     descricao:
       'Bolsa estruturada em crochê tom café, com base rígida que mantém o formato e compartimento interno espaçoso.',
     caracteristicas: [
@@ -64,7 +64,7 @@ export const produtos = [
     nome: 'Bolsa Transversal Marfim',
     preco: 'R$ 165,00',
     disponibilidade: 'estoque',
-    imagens: [asset('bolsas/bolsa4.webp'), asset('bolsas/lado4.webp')],
+    imagens: [ativo('/bolsas/bolsa4.webp'), ativo('/bolsas/lado4.webp')],
     descricao:
       'Bolsa transversal em crochê marfim, compacta e prática, com alça fixa ajustada ao corpo.',
     caracteristicas: [
