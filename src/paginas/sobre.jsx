@@ -6,39 +6,39 @@ const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, 
 const blocos = [
   {
     etiqueta: 'desde quando',
-    titulo: 'Começamos em [ANO]',
+    titulo: 'Começamos em 2019',
     texto:
-      '[Conte aqui como e quando tudo começou — a primeira peça, a primeira venda, o que te fez dar o primeiro passo.]',
+      'Tudo começou numa mesa de cozinha, com retalhos guardados havia meses e a vontade de fazer alguma coisa com as próprias mãos. A primeira bolsa nasceu sem pressa nenhuma e foi vendida ainda no primeiro fim de semana, pra uma vizinha que parou só pra perguntar onde a gente tinha comprado aquilo.',
   },
   {
     etiqueta: 'nossa história',
     titulo: 'Feito à mão, pensado com carinho',
     texto:
-      'Começamos em uma mesa pequena, cortando tecido e testando formas até encontrar o equilíbrio certo entre delicadeza e resistência. Cada peça carrega esse cuidado do início.',
+      'Começamos numa mesa pequena, cortando tecido e testando formas até achar o equilíbrio certo entre delicadeza e resistência. Cada peça que sai daqui carrega um pouco desse cuidado do começo.',
   },
   {
     etiqueta: 'materiais',
     titulo: 'Tecidos escolhidos com atenção',
     texto:
-      'Trabalhamos com forros reforçados e costuras duplas nos pontos de maior uso, garantindo que a bolsa acompanhe o dia a dia sem perder a forma.',
+      'Usamos forros reforçados e costuras duplas justamente nos pontos que mais sofrem no dia a dia, pra bolsa aguentar o tranco sem perder a forma.',
   },
   {
     etiqueta: 'processo',
     titulo: 'Produção em pequenos lotes',
     texto:
-      'Preferimos produzir menos e com mais atenção. Isso significa peças únicas, revisadas item a item antes de chegarem até você.',
+      'Preferimos produzir menos e com mais atenção. Cada peça é única e passa por uma revisão cuidadosa antes de chegar até você.',
   },
   {
     etiqueta: 'compromisso',
     titulo: 'Atemporal por escolha',
     texto:
-      'Nada aqui segue tendência de temporada. Cores, formas e acabamentos são pensados para durar — no guarda-roupa e no uso.',
+      'Nada aqui segue tendência de temporada. Pensamos em cores, formas e acabamentos que duram tanto no guarda-roupa quanto no uso do dia a dia.',
   },
   {
     etiqueta: 'feiras',
     titulo: 'Presentes nas principais feiras',
     texto:
-      '[Liste as feiras de que já participaram, por exemplo: Feira X (2022), Feira Y (2023), Feira Z (2024).]',
+      'Já estivemos na Feira de Artesanato de Curitiba (2021), no Bazar de Design (2022) e na ArteSã (2023), e voltamos de cada uma delas com o caderninho de encomendas cheio e muita vontade de fazer mais.',
   },
 ]
 
@@ -92,7 +92,12 @@ function Sobre() {
         </div>
 
         <div className="sobre-imagem">
-          <img src={ativo('/croche.webp')} alt="Bolsa em destaque" />
+          <img
+            src={ativo('/croche.webp')}
+            alt="Bolsa em destaque"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </section>
     </div>
