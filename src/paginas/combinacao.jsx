@@ -74,14 +74,24 @@ function Combinacao() {
                   className="combinacao-imagem__camada combinacao-camada--saindo"
                   key={`saindo-${lookAnterior.imagem}`}
                 >
-                  <img src={lookAnterior.imagem} alt="Combinação de produtos" />
+                  <img
+                    src={lookAnterior.imagem}
+                    alt="Combinação de produtos"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               )}
               <div
                 className="combinacao-imagem__camada combinacao-camada--entrando"
                 key={`entrando-${imagem}`}
               >
-                <img src={imagem} alt="Combinação de produtos" />
+                <img
+                  src={imagem}
+                  alt="Combinação de produtos"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
 
@@ -95,6 +105,8 @@ function Combinacao() {
                     <img
                       src={lookAnterior.produto.imagem}
                       alt={lookAnterior.produto.nome}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 )}
@@ -102,7 +114,12 @@ function Combinacao() {
                   className="combinacao-produto__imagem__camada combinacao-camada--entrando"
                   key={`entrando-${produto.nome}`}
                 >
-                  <img src={produto.imagem} alt={produto.nome} />
+                  <img
+                    src={produto.imagem}
+                    alt={produto.nome}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
               <h3 className="combinacao-produto__nome" key={`nome-${produto.nome}`}>
