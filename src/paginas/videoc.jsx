@@ -3,11 +3,32 @@ import './videoc.css'
 
 function ContatoVideo() {
   const videoRef = useRef(null)
+  const containerRef = useRef(null)
   const [tocando, setTocando] = useState(false)
   const [progresso, setProgresso] = useState(0)
   const [mudo, setMudo] = useState(true)
   const [controlesVisiveis, setControlesVisiveis] = useState(false)
+  const [pertoDoVideo, setPertoDoVideo] = useState(false)
   const esconderTimeoutRef = useRef(null)
+
+  useEffect(() => {
+    if (pertoDoVideo) return
+    const elemento = containerRef.current
+    if (!elemento) return
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        if (entradas[0]?.isIntersecting) {
+          setPertoDoVideo(true)
+          observador.disconnect()
+        }
+      },
+      { rootMargin: '600px 0px' }
+    )
+
+    observador.observe(elemento)
+    return () => observador.disconnect()
+  }, [pertoDoVideo])
 
   const mostrarControles = () => {
     setControlesVisiveis(true)
@@ -65,6 +86,7 @@ function ContatoVideo() {
   return (
     <section className="contato-video">
       <div
+        ref={containerRef}
         className={`contato-video-container${
           tocando ? ' contato-video-container--tocando' : ''
         }${controlesVisiveis ? ' contato-video-container--controles' : ''}`}
@@ -77,7 +99,8 @@ function ContatoVideo() {
         <video
           ref={videoRef}
           className="contato-video-media"
-          src="horizontal.mp4"
+          src={pertoDoVideo ? 'horizontal.mp4' : undefined}
+          preload={pertoDoVideo ? 'metadata' : 'none'}
           loop
           muted={mudo}
           playsInline
