@@ -103,6 +103,29 @@
   cursor: grabbing;
 }
 
+.personalizar-modelo-carregando {
+  position: absolute;
+  inset: 8%;
+  border-radius: 1rem;
+  background: linear-gradient(
+    100deg,
+    rgba(8, 6, 13, 0.04) 30%,
+    rgba(8, 6, 13, 0.08) 50%,
+    rgba(8, 6, 13, 0.04) 70%
+  );
+  background-size: 200% 100%;
+  animation: personalizar-pulso 1.6s ease-in-out infinite;
+}
+
+@keyframes personalizar-pulso {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
 .personalizar-seta {
   position: absolute;
   top: 50%;
