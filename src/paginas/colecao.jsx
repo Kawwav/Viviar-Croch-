@@ -3,19 +3,19 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  forwardRef,
-  useImperativeHandle,
+  lazy,
+  Suspense,
 } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { useTransicao } from '../componentes/TransicaoCortina.jsx'
 import './colecao.css'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const CamadaModelo3D = lazy(() => import('./colecaoModelo3D.jsx'))
+const PERSONALIZAR_ROOT_MARGIN = '600px 0px'
 
 const ativo = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(/^\//, '')}`
 
@@ -135,220 +135,6 @@ const modelosPersonalizar = [
   },
 ]
 
-const CamadaModelo3D = forwardRef(function CamadaModelo3D(
-  { className, style, titulo },
-  refExterna
-) {
-  const containerRef = useRef(null)
-  const estadoRef = useRef(null)
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const cena = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100)
-    camera.position.set(0, 0.15, 3.2)
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.outputColorSpace = THREE.SRGBColorSpace
-    renderer.setClearColor(0x000000, 0)
-    renderer.domElement.style.width = '100%'
-    renderer.domElement.style.height = '100%'
-    renderer.domElement.style.display = 'block'
-    container.appendChild(renderer.domElement)
-
-    const controles = new OrbitControls(camera, renderer.domElement)
-    controles.target.set(0, 0, 0)
-    controles.enableDamping = true
-    controles.dampingFactor = 0.08
-    controles.autoRotate = true
-    controles.autoRotateSpeed = 1.3
-
-    controles.enablePan = false
-    controles.enableZoom = true
-    controles.zoomSpeed = 1.1
-    controles.rotateSpeed = 0.9
-    controles.minDistance = 1.8
-    controles.maxDistance = 5
-    controles.enabled = false // só a camada da frente recebe interação
-    controles.update()
-
-    const bloquearScrollDaPagina = (evento) => {
-      evento.preventDefault()
-      evento.stopPropagation()
-    }
-    container.addEventListener('wheel', bloquearScrollDaPagina, { passive: false })
-
-    renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
-
-    cena.add(new THREE.AmbientLight(0xffffff, 1.1))
-    const luzPrincipal = new THREE.DirectionalLight(0xffffff, 1.4)
-    luzPrincipal.position.set(3, 4, 5)
-    luzPrincipal.castShadow = true
-    luzPrincipal.shadow.mapSize.set(1024, 1024)
-    luzPrincipal.shadow.camera.near = 0.1
-    luzPrincipal.shadow.camera.far = 20
-    luzPrincipal.shadow.camera.left = -3
-    luzPrincipal.shadow.camera.right = 3
-    luzPrincipal.shadow.camera.top = 3
-    luzPrincipal.shadow.camera.bottom = -3
-    luzPrincipal.shadow.bias = -0.0008
-    luzPrincipal.shadow.radius = 6
-    cena.add(luzPrincipal)
-    const luzPreenchimento = new THREE.DirectionalLight(0xffffff, 0.6)
-    luzPreenchimento.position.set(-4, -1.5, -3)
-    cena.add(luzPreenchimento)
-    const sombraChao = new THREE.Mesh(
-      new THREE.PlaneGeometry(20, 20),
-      new THREE.ShadowMaterial({ opacity: 0.32 })
-    )
-    sombraChao.rotation.x = -Math.PI / 2
-    sombraChao.receiveShadow = true
-    cena.add(sombraChao)
-
-    const redimensionar = () => {
-      const largura = container.clientWidth || 1
-      const altura = container.clientHeight || 1
-      camera.aspect = largura / altura
-      camera.updateProjectionMatrix()
-      renderer.setSize(largura, altura, false)
-    }
-    redimensionar()
-    const observador = new ResizeObserver(redimensionar)
-    observador.observe(container)
-
-    let quadro = null
-    const animar = () => {
-      controles.update()
-      renderer.render(cena, camera)
-      quadro = requestAnimationFrame(animar)
-    }
-    animar()
-
-    estadoRef.current = {
-      cena,
-      camera,
-      renderer,
-      controles,
-      carregador: new GLTFLoader(),
-      modeloAtual: null,
-      sombraChao,
-      luzPrincipal,
-    }
-
-    return () => {
-      cancelAnimationFrame(quadro)
-      observador.disconnect()
-      container.removeEventListener('wheel', bloquearScrollDaPagina)
-      controles.dispose()
-      renderer.dispose()
-      if (renderer.domElement.parentNode === container) {
-        container.removeChild(renderer.domElement)
-      }
-      estadoRef.current = null
-    }
-  }, [])
-
-  useImperativeHandle(refExterna, () => ({
-    carregarModelo(url, aoTerminar) {
-      const estado = estadoRef.current
-      if (!estado) return
-      estado.carregador.load(
-        url,
-        (gltf) => {
-          const antigo = estado.modeloAtual
-          const modelo = gltf.scene
-          modelo.traverse((filho) => {
-            if (filho.isMesh) {
-              filho.castShadow = true
-              filho.receiveShadow = false
-            }
-          })
-          const caixa = new THREE.Box3().setFromObject(modelo)
-          const centro = caixa.getCenter(new THREE.Vector3())
-          const tamanho = caixa.getSize(new THREE.Vector3())
-          const raio = Math.max(tamanho.x, tamanho.y, tamanho.z) / 2 || 1
-          modelo.position.sub(centro) // centraliza o modelo na origem
-          const baseY = caixa.min.y - centro.y
-          estado.sombraChao.position.y = baseY - raio * 0.01
-          const alcanceSombra = raio * 2.2
-          estado.luzPrincipal.shadow.camera.left = -alcanceSombra
-          estado.luzPrincipal.shadow.camera.right = alcanceSombra
-          estado.luzPrincipal.shadow.camera.top = alcanceSombra
-          estado.luzPrincipal.shadow.camera.bottom = -alcanceSombra
-          estado.luzPrincipal.shadow.camera.updateProjectionMatrix()
-          const fovRad = (estado.camera.fov * Math.PI) / 180
-          const distancia = (raio / Math.sin(fovRad / 2)) * 1.35
-          estado.controles.target.set(0, 0, 0)
-          estado.controles.minDistance = distancia * 0.28
-          estado.controles.maxDistance = distancia * 3.2
-          if (!antigo) {
-            const direcao = estado.camera.position.clone().normalize()
-            estado.camera.position.copy(direcao.multiplyScalar(distancia))
-          }
-          estado.controles.update()
-
-          estado.cena.add(modelo)
-          estado.modeloAtual = modelo
-          estado.distanciaBase = distancia
-          if (antigo) estado.cena.remove(antigo)
-          aoTerminar && aoTerminar()
-        },
-        undefined,
-        (erro) => console.error('falha ao carregar modelo 3d:', erro)
-      )
-    },
-
-    obterElemento() {
-      return containerRef.current
-    },
-    definirRecorte(valorClipPath) {
-      if (containerRef.current) containerRef.current.style.clipPath = valorClipPath
-    },
-    definirZIndex(z) {
-      if (containerRef.current) containerRef.current.style.zIndex = z
-    },
-
-    definirVisivel(visivel) {
-      if (containerRef.current) containerRef.current.style.opacity = visivel ? '1' : '0'
-    },
-    definirInterativa(ativa) {
-      const estado = estadoRef.current
-      if (!estado) return
-      estado.controles.enabled = ativa
-      estado.controles.autoRotate = ativa
-    },
-    lerOrbita() {
-      const estado = estadoRef.current
-      if (!estado) return null
-      const deslocamento = estado.camera.position.clone().sub(estado.controles.target)
-      const esferica = new THREE.Spherical().setFromVector3(deslocamento)
-      return { theta: esferica.theta, phi: esferica.phi, radius: esferica.radius }
-    },
-    aplicarOrbita(orbita) {
-      const estado = estadoRef.current
-      if (!estado || !orbita) return
-      const esferica = new THREE.Spherical(orbita.radius, orbita.phi, orbita.theta)
-      const posicao = new THREE.Vector3().setFromSpherical(esferica).add(estado.controles.target)
-      estado.camera.position.copy(posicao)
-      estado.controles.update()
-    },
-  }))
-
-  return (
-    <div
-      ref={containerRef}
-      className={className}
-      style={style}
-      role="img"
-      aria-label={titulo}
-    />
-  )
-})
-
 const fraseEsquerda = 'FEITO PRA DURAR'
 const fraseDireita = 'ELEGANTE, ATEMPORAL E FUNCIONAL'
 const repeticoes = Array.from({ length: 8 })
@@ -373,6 +159,8 @@ function Colecao() {
   const [podeVoltar, setPodeVoltar] = useState(false)
   const [podeAvancar, setPodeAvancar] = useState(true)
   const camadaRefs = [useRef(null), useRef(null)]
+  const personalizarRef = useRef(null)
+  const [personalizarVisivel, setPersonalizarVisivel] = useState(false)
   const [produtoAtual, setProdutoAtual] = useState(0)
   const [coresPorCamada, setCoresPorCamada] = useState([
     modelosPersonalizar[0].cores[1],
@@ -579,21 +367,24 @@ function Colecao() {
   }, [produtoAtual])
 
   useEffect(() => {
-    const camadaA = camadaRefs[0].current
-    const camadaB = camadaRefs[1].current
-    if (!camadaA || !camadaB) return
+    if (personalizarVisivel) return
+    const elemento = personalizarRef.current
+    if (!elemento) return
 
-    camadaA.definirZIndex(2)
-    camadaB.definirZIndex(1)
-    camadaA.definirRecorte(RECORTE_VISIVEL)
-    camadaB.definirRecorte(RECORTE_VISIVEL)
-    camadaA.definirVisivel(true)
-    camadaB.definirVisivel(false)
-    camadaA.definirInterativa(true)
-    camadaB.definirInterativa(false)
-    camadaA.carregarModelo(modelosPersonalizar[0].cores[1].modelo)
-    camadaB.carregarModelo(modelosPersonalizar[0].cores[1].modelo)
-  }, [])
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        if (entradas[0]?.isIntersecting) {
+          setPersonalizarVisivel(true)
+          observador.disconnect()
+        }
+      },
+      { rootMargin: PERSONALIZAR_ROOT_MARGIN }
+    )
+
+    observador.observe(elemento)
+    return () => observador.disconnect()
+  }, [personalizarVisivel])
+
   useLayoutEffect(() => {
     const atualizarIndicador = () => {
       const abas = abasRef.current
@@ -786,6 +577,8 @@ function Colecao() {
                     alt={produto.nome}
                     draggable="false"
                     className="colecao-imagem-principal"
+                    loading="lazy"
+                    decoding="async"
                   />
                   {imagemLado && (
                     <img
@@ -794,6 +587,8 @@ function Colecao() {
                       draggable="false"
                       className="colecao-imagem-lado"
                       aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
                     />
                   )}
                 </div>
@@ -855,13 +650,13 @@ function Colecao() {
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`esq-a-${indice}`}>
                 <span className="faixa-texto">{fraseEsquerda}</span>
-                <img src={ativo('/bolsas/bolsa1.webp')} alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa1.webp')} alt="" className="faixa-imagem" loading="lazy" decoding="async" />
               </span>
             ))}
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`esq-b-${indice}`} aria-hidden="true">
                 <span className="faixa-texto">{fraseEsquerda}</span>
-                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" loading="lazy" decoding="async" />
               </span>
             ))}
           </div>
@@ -872,20 +667,20 @@ function Colecao() {
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`dir-a-${indice}`}>
                 <span className="faixa-texto">{fraseDireita}</span>
-                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" loading="lazy" decoding="async" />
               </span>
             ))}
             {repeticoes.map((_, indice) => (
               <span className="faixa-item" key={`dir-b-${indice}`} aria-hidden="true">
                 <span className="faixa-texto">{fraseDireita}</span>
-                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" />
+                <img src={ativo('/bolsas/bolsa2.webp')} alt="" className="faixa-imagem" loading="lazy" decoding="async" />
               </span>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="colecao-personalizar">
+      <div className="colecao-personalizar" ref={personalizarRef}>
         <div className="colecao-personalizar-texto">
           <h2 className="personalizar-titulo">Deixe do seu jeito</h2>
           <p className="personalizar-subtitulo">escolha sua cor</p>
@@ -923,15 +718,24 @@ function Colecao() {
           </button>
 
           <div className="personalizar-modelo-wrapper" data-lenis-prevent-wheel>
-            {[0, 1].map((indice) => (
-              <CamadaModelo3D
-                key={indice}
-                ref={camadaRefs[indice]}
-                className="personalizar-modelo"
-                style={{ zIndex: indice === frente ? 2 : 1 }}
-                titulo={`Bolsa de crochê ${modelosPersonalizar[produtoAtual].nome} na cor ${coresPorCamada[indice].nome}`}
-              />
-            ))}
+            {personalizarVisivel ? (
+              <Suspense fallback={<div className="personalizar-modelo-carregando" />}>
+                {[0, 1].map((indice) => (
+                  <CamadaModelo3D
+                    key={indice}
+                    ref={camadaRefs[indice]}
+                    className="personalizar-modelo"
+                    style={{ zIndex: indice === frente ? 2 : 1 }}
+                    titulo={`Bolsa de crochê ${modelosPersonalizar[produtoAtual].nome} na cor ${coresPorCamada[indice].nome}`}
+                    visivelInicial={indice === frente}
+                    interativaInicial={indice === frente}
+                    modeloInicial={corSelecionada.modelo}
+                  />
+                ))}
+              </Suspense>
+            ) : (
+              <div className="personalizar-modelo-carregando" />
+            )}
           </div>
 
           <button
