@@ -20,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger)
 // git add . 
 //git commit -m ""  
 //git branch -M main
+//git push
 
 
 function Home() {
